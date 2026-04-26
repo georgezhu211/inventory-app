@@ -6,6 +6,11 @@
     <title>Pokemon</title>
   </head>
   <body>
-    <p>pokemon index view</p>
+    <h1>Pokemon List</h1>
+    <ul>
+      <% if (locals.pokemons) {%> <% pokemons.forEach(pokemon => { %>
+      <li>ID: <%= pokemon.id %>, Name: <%= pokemon.name %></li>
+      <% }); %> <% } %>
+    </ul>
   </body>
 </html>
