@@ -1,3 +1,3 @@
 exports.index = (req, res) => {
-  res.send("index route");
+  res.render("pokemon/index");
 };
