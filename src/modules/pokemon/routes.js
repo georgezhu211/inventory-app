@@ -1,7 +1,9 @@
 const { Router } = require("express");
 
+const c = require("../pokemon/controller");
+
 const router = Router();
 
-router.get("/", (req, res) => res.send("index"));
+router.get("/", c.index);
 
 module.exports = router;
