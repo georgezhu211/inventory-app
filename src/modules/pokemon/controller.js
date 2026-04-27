@@ -1,3 +1,4 @@
+const { validationResult, matchedData } = require("express-validator");
 const NotFoundError = require("../../errors/NotFoundError");
 const pokemonRepository = require("../pokemon/repository");
 
@@ -11,8 +12,18 @@ exports.new = (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  const { name } = req.body;
-  await pokemonRepository.create(name);
+  const result = validationResult(req);
+
+  if (!result.isEmpty()) {
+    return res.status(400).render("pokemon/new", {
+      errors: result.array(),
+    });
+  }
+
+  const { name } = matchedData(req);
+
+  await pokemonRepository.create({ name });
+
   res.redirect("/pokemon");
 };
 
@@ -37,8 +48,25 @@ exports.edit = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const { name } = req.body;
-  await pokemonRepository.update(req.params.id, name);
+  const pokemon = await pokemonRepository.findById(req.params.id);
+
+  if (!pokemon) {
+    throw new NotFoundError("Pokemon not found");
+  }
+
+  const result = validationResult(req);
+
+  if (!result.isEmpty()) {
+    return res.status(400).render("pokemon/edit", {
+      pokemon,
+      errors: result.array(),
+    });
+  }
+
+  const { name } = matchedData(req);
+
+  await pokemonRepository.update(req.params.id, { name });
+
   res.redirect("/pokemon");
 };
 

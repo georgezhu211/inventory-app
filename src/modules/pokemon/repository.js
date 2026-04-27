@@ -10,12 +10,15 @@ exports.findById = async (id) => {
   return rows[0];
 };
 
-exports.create = async (name) => {
-  await db.query("INSERT INTO pokemon (name) VALUES ($1)", [name]);
+exports.create = async (pokemon) => {
+  await db.query("INSERT INTO pokemon (name) VALUES ($1)", [pokemon.name]);
 };
 
-exports.update = async (id, name) => {
-  await db.query("UPDATE pokemon SET name = $1 WHERE id = $2", [name, id]);
+exports.update = async (id, pokemon) => {
+  await db.query("UPDATE pokemon SET name = $1 WHERE id = $2", [
+    pokemon.name,
+    id,
+  ]);
 };
 
 exports.delete = async (id) => {

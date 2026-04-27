@@ -7,6 +7,7 @@
   </head>
   <body>
     <h1>Edit Pokemon</h1>
+    <%- include("../partials/errors.ejs") %>
     <form action="/pokemon/<%= pokemon.id %>/update" method="POST">
       <label for="name">Pokemon: </label>
       <input type="text" name="name" id="name" value="<%= pokemon.name %>" />
