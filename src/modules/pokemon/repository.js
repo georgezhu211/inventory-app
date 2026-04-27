@@ -19,5 +19,9 @@ exports.update = async (id, name) => {
 };
 
 exports.delete = async (id) => {
-  await db.query("DELETE FROM pokemon WHERE id = $1", [id]);
+  const { rows } = await db.query(
+    "DELETE FROM pokemon WHERE id = $1 RETURNING *",
+    [id],
+  );
+  return rows[0];
 };

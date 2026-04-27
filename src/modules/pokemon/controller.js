@@ -1,3 +1,4 @@
+const NotFoundError = require("../../errors/NotFoundError");
 const pokemonRepository = require("../pokemon/repository");
 
 exports.index = async (req, res) => {
@@ -17,11 +18,21 @@ exports.create = async (req, res) => {
 
 exports.show = async (req, res) => {
   const pokemon = await pokemonRepository.findById(req.params.id);
+
+  if (!pokemon) {
+    throw new NotFoundError("Pokemon not found");
+  }
+
   res.render("pokemon/show", { pokemon });
 };
 
 exports.edit = async (req, res) => {
   const pokemon = await pokemonRepository.findById(req.params.id);
+
+  if (!pokemon) {
+    throw new NotFoundError("Pokemon not found");
+  }
+
   res.render("pokemon/edit", { pokemon });
 };
 
@@ -32,6 +43,11 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  await pokemonRepository.delete(req.params.id);
+  const pokemon = await pokemonRepository.delete(req.params.id);
+
+  if (!pokemon) {
+    throw new NotFoundError("Pokemon not found");
+  }
+
   res.redirect("/pokemon");
 };
