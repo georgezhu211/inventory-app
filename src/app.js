@@ -16,4 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/pokemon", pokemonRoutes);
 app.get("/", (req, res) => res.send("Hello, world!"));
 
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.statusCode || 500).send(err.message);
+});
+
 module.exports = app;
