@@ -11,4 +11,7 @@ router.post("/", c.create);
 
 router.get("/:id", c.show);
 
+router.get("/:id/edit", c.edit);
+router.post("/:id/update", c.update);
+
 module.exports = router;
