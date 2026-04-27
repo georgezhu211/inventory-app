@@ -14,4 +14,6 @@ router.get("/:id", c.show);
 router.get("/:id/edit", c.edit);
 router.post("/:id/update", c.update);
 
+router.post("/:id/delete", c.delete);
+
 module.exports = router;

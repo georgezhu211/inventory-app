@@ -17,3 +17,7 @@ exports.create = async (name) => {
 exports.update = async (id, name) => {
   await db.query("UPDATE pokemon SET name = $1 WHERE id = $2", [name, id]);
 };
+
+exports.delete = async (id) => {
+  await db.query("DELETE FROM pokemon WHERE id = $1", [id]);
+};

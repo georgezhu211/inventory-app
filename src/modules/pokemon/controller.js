@@ -30,3 +30,8 @@ exports.update = async (req, res) => {
   await pokemonRepository.update(req.params.id, name);
   res.redirect("/pokemon");
 };
+
+exports.delete = async (req, res) => {
+  await pokemonRepository.delete(req.params.id);
+  res.redirect("/pokemon");
+};
