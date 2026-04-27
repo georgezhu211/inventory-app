@@ -14,3 +14,8 @@ exports.create = async (req, res) => {
   await pokemonRepository.create(name);
   res.redirect("/pokemon");
 };
+
+exports.show = async (req, res) => {
+  const pokemon = await pokemonRepository.findById(req.params.id);
+  res.render("pokemon/show", { pokemon });
+};

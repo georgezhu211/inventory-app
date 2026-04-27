@@ -9,7 +9,11 @@
     <h1>Pokemon List</h1>
     <ul>
       <% if (locals.pokemons) {%> <% pokemons.forEach(pokemon => { %>
-      <li>ID: <%= pokemon.id %>, Name: <%= pokemon.name %></li>
+      <li>
+        ID: <%= pokemon.id %>, Name: <%= pokemon.name %>
+        <a href="pokemon/<%= pokemon.id %>">View</a>
+      </li>
+
       <% }); %> <% } %>
     </ul>
     <a href="/pokemon/new">Add Pokemon</a>
