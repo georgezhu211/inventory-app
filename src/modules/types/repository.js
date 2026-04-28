@@ -5,6 +5,11 @@ exports.findAll = async () => {
   return rows;
 };
 
+exports.findById = async (id) => {
+  const { rows } = await db.query("SELECT * FROM types WHERE id = $1", [id]);
+  return rows[0];
+};
+
 exports.create = async (type) => {
   await db.query("INSERT INTO types (name) VALUES ($1)", [type.name]);
 };

@@ -1,5 +1,5 @@
 const { validationResult, matchedData } = require("express-validator");
-
+const NotFoundError = require("../../errors/NotFoundError");
 const repository = require("../types/repository");
 
 exports.index = async (req, res) => {
@@ -25,4 +25,14 @@ exports.create = async (req, res) => {
   await repository.create({ name });
 
   res.redirect("/types");
+};
+
+exports.show = async (req, res) => {
+  const type = await repository.findById(req.params.id);
+
+  if (!type) {
+    throw new NotFoundError("Type not found");
+  }
+
+  res.render("types/show", { type });
 };
