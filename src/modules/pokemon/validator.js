@@ -6,12 +6,11 @@ const validator = [
     .notEmpty()
     .withMessage("Name is required")
     .bail()
-    .isAlpha()
-    .withMessage(`Name must only contain letters`)
+    .isString()
+    .withMessage(`Name must be a string`)
     .bail()
     .isLength({ min: 3, max: 12 })
     .withMessage(`Name must be between 3 and 12 characters`),
-  ,
 ];
 
 module.exports = validator;

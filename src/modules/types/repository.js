@@ -17,3 +17,11 @@ exports.create = async (type) => {
 exports.update = async (id, type) => {
   await db.query("UPDATE types SET name = $1 WHERE id = $2", [type.name, id]);
 };
+
+exports.delete = async (id) => {
+  const { rows } = await db.query(
+    "DELETE FROM types WHERE id = $1 RETURNING *",
+    [id],
+  );
+  return rows[0];
+};

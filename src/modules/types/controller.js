@@ -69,3 +69,13 @@ exports.update = async (req, res) => {
 
   res.redirect("/types");
 };
+
+exports.delete = async (req, res) => {
+  const type = await repository.delete(req.params.id);
+
+  if (!type) {
+    throw new NotFoundError("Type not found");
+  }
+
+  res.redirect("/types");
+};

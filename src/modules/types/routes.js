@@ -14,4 +14,6 @@ router.get("/:id", validateId, controller.show);
 router.get("/:id/edit", validateId, controller.edit);
 router.post("/:id/update", validateId, validateType, controller.update);
 
+router.post("/:id/delete", validateId, controller.delete);
+
 module.exports = router;
