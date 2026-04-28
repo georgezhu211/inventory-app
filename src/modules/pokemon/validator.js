@@ -1,6 +1,6 @@
-const { body, validationResult, matchedData } = require("express-validator");
+const { body } = require("express-validator");
 
-const validatePokemon = [
+const validator = [
   body("name")
     .trim()
     .notEmpty()
@@ -14,4 +14,4 @@ const validatePokemon = [
   ,
 ];
 
-module.exports = validatePokemon;
+module.exports = validator;
