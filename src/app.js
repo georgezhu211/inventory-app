@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use("/pokemon", pokemonRoutes);
 app.use("/types", typeRoutes);
-app.get("/", (req, res) => res.send("Hello, world!"));
+app.get("/", (req, res) => res.render("home"));
 
 // Global error handler
 app.use((err, req, res, next) => {
