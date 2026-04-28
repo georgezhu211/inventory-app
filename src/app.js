@@ -21,7 +21,11 @@ app.get("/", (req, res) => res.render("home"));
 // Global error handler
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(err.statusCode || 500).send(err.message);
+
+  const statusCode = err.statusCode || 500;
+  const message = statusCode === 500 ? "Something went wrong" : err.message;
+
+  res.status(statusCode).send(message);
 });
 
 module.exports = app;
