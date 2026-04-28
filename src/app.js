@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("node:path");
 
 const pokemonRoutes = require("./modules/pokemon/routes");
+const typeRoutes = require("./modules/types/routes");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/pokemon", pokemonRoutes);
+app.use("/types", typeRoutes);
 app.get("/", (req, res) => res.send("Hello, world!"));
 
 // Global error handler
