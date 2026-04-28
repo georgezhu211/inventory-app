@@ -1,19 +1,19 @@
 const { Router } = require("express");
 const validateId = require("../../middlewares/validateId");
-const c = require("../pokemon/controller");
+const controller = require("../pokemon/controller");
 const validatePokemon = require("./validator");
 const router = Router();
 
-router.get("/", c.index);
+router.get("/", controller.index);
 
-router.get("/new", c.new);
-router.post("/", validatePokemon, c.create);
+router.get("/new", controller.new);
+router.post("/", validatePokemon, controller.create);
 
-router.get("/:id", validateId, c.show);
+router.get("/:id", validateId, controller.show);
 
-router.get("/:id/edit", validateId, c.edit);
-router.post("/:id/update", validateId, validatePokemon, c.update);
+router.get("/:id/edit", validateId, controller.edit);
+router.post("/:id/update", validateId, validatePokemon, controller.update);
 
-router.post("/:id/delete", validateId, c.delete);
+router.post("/:id/delete", validateId, controller.delete);
 
 module.exports = router;

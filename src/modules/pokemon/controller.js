@@ -1,9 +1,9 @@
 const { validationResult, matchedData } = require("express-validator");
 const NotFoundError = require("../../errors/NotFoundError");
-const pokemonRepository = require("../pokemon/repository");
+const repository = require("../pokemon/repository");
 
 exports.index = async (req, res) => {
-  const pokemons = await pokemonRepository.findAll();
+  const pokemons = await repository.findAll();
   res.render("pokemon/index", { pokemons });
 };
 
@@ -22,13 +22,13 @@ exports.create = async (req, res) => {
 
   const { name } = matchedData(req);
 
-  await pokemonRepository.create({ name });
+  await repository.create({ name });
 
   res.redirect("/pokemon");
 };
 
 exports.show = async (req, res) => {
-  const pokemon = await pokemonRepository.findById(req.params.id);
+  const pokemon = await repository.findById(req.params.id);
 
   if (!pokemon) {
     throw new NotFoundError("Pokemon not found");
@@ -38,7 +38,7 @@ exports.show = async (req, res) => {
 };
 
 exports.edit = async (req, res) => {
-  const pokemon = await pokemonRepository.findById(req.params.id);
+  const pokemon = await repository.findById(req.params.id);
 
   if (!pokemon) {
     throw new NotFoundError("Pokemon not found");
@@ -48,7 +48,7 @@ exports.edit = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const pokemon = await pokemonRepository.findById(req.params.id);
+  const pokemon = await repository.findById(req.params.id);
 
   if (!pokemon) {
     throw new NotFoundError("Pokemon not found");
@@ -65,13 +65,13 @@ exports.update = async (req, res) => {
 
   const { name } = matchedData(req);
 
-  await pokemonRepository.update(req.params.id, { name });
+  await repository.update(req.params.id, { name });
 
   res.redirect("/pokemon");
 };
 
 exports.delete = async (req, res) => {
-  const pokemon = await pokemonRepository.delete(req.params.id);
+  const pokemon = await repository.delete(req.params.id);
 
   if (!pokemon) {
     throw new NotFoundError("Pokemon not found");
