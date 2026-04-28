@@ -11,6 +11,15 @@
     <form action="/pokemon/<%= pokemon.id %>/update" method="POST">
       <label for="name">Pokemon: </label>
       <input type="text" name="name" id="name" value="<%= pokemon.name %>" />
+
+      <label for="type">Choose a type: </label>
+      <select name="type_id" id="type">
+        <% for (const type of types) { %>
+          <option value="<%= type.id %>" <%= type.id === pokemon.type_id ? 'selected' : '' %>>
+            <%= type.name %>
+          </option>
+        <% } %>
+      </select>
       <button type="submit">Submit</button>
     </form>
     <a href="/pokemon">Return</a>

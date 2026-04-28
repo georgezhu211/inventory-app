@@ -11,6 +11,13 @@ const validator = [
     .bail()
     .isLength({ min: 3, max: 12 })
     .withMessage(`Name must be between 3 and 12 characters`),
+  body("type_id")
+    .notEmpty()
+    .withMessage("Type is required")
+    .bail()
+    .isInt({ min: 1 })
+    .withMessage("Invalid type")
+    .toInt(),
 ];
 
 module.exports = validator;
