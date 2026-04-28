@@ -13,3 +13,7 @@ exports.findById = async (id) => {
 exports.create = async (type) => {
   await db.query("INSERT INTO types (name) VALUES ($1)", [type.name]);
 };
+
+exports.update = async (id, type) => {
+  await db.query("UPDATE types SET name = $1 WHERE id = $2", [type.name, id]);
+};

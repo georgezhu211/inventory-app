@@ -11,4 +11,7 @@ router.post("/", validateType, controller.create);
 
 router.get("/:id", validateId, controller.show);
 
+router.get("/:id/edit", validateId, controller.edit);
+router.post("/:id/update", validateId, validateType, controller.update);
+
 module.exports = router;

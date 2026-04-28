@@ -36,3 +36,36 @@ exports.show = async (req, res) => {
 
   res.render("types/show", { type });
 };
+
+exports.edit = async (req, res) => {
+  const type = await repository.findById(req.params.id);
+
+  if (!type) {
+    throw new NotFoundError("Type not found");
+  }
+
+  res.render("types/edit", { type });
+};
+
+exports.update = async (req, res) => {
+  const type = await repository.findById(req.params.id);
+
+  if (!type) {
+    throw new NotFoundError("Type not found");
+  }
+
+  const result = validationResult(req);
+
+  if (!result.isEmpty()) {
+    return res.status(400).render("types/edit", {
+      type,
+      errors: result.array(),
+    });
+  }
+
+  const { name } = matchedData(req);
+
+  await repository.update(req.params.id, { name });
+
+  res.redirect("/types");
+};
