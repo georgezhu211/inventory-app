@@ -1,6 +1,7 @@
 const { validationResult, matchedData } = require("express-validator");
 const NotFoundError = require("../../errors/NotFoundError");
 const repository = require("../types/repository");
+const BadRequestError = require("../../errors/BadRequestError");
 
 exports.index = async (req, res) => {
   const types = await repository.findAll();
@@ -73,6 +74,12 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
+  const pokemons = await repository.findByTypeId(req.params.id);
+
+  if (pokemons.length > 0) {
+    throw new BadRequestError("Cannot delete type with existing pokemon");
+  }
+
   const type = await repository.delete(req.params.id);
 
   if (!type) {
