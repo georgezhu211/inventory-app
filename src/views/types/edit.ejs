@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Type</title>
-  </head>
-  <body>
-    <h1>Edit Type</h1>
-    <%- include("../partials/errors.ejs") %>
-    <form action="/types/<%= type.id %>/update" method="POST">
-      <label for="name">Type: </label>
-      <input type="text" name="name" id="name" value="<%= type.name %>" />
-      <button type="submit">Submit</button>
-    </form>
-    <a href="/types">Return</a>
-  </body>
-</html>
+<h1>Edit Type</h1>
+<%- include("../partials/errors.ejs") %>
+<form action="/types/<%= type.id %>/update" method="POST">
+  <label for="name">Type: </label>
+  <input type="text" name="name" id="name" value="<%= type.name %>" />
+  <button type="submit">Submit</button>
+</form>
+<a href="/types">Return</a>

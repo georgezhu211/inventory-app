@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("node:path");
+const expressLayouts = require("express-ejs-layouts");
 
 const pokemonRoutes = require("./modules/pokemon/routes");
 const typeRoutes = require("./modules/types/routes");
@@ -12,11 +13,12 @@ app.set("view engine", "ejs");
 
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
+app.use(expressLayouts);
 
 // Routes
 app.use("/pokemon", pokemonRoutes);
 app.use("/types", typeRoutes);
-app.get("/", (req, res) => res.render("home"));
+app.get("/", (req, res) => res.redirect("/types"));
 
 // Global error handler
 app.use((err, req, res, next) => {

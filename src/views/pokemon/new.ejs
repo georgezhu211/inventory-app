@@ -1,31 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Pokemon</title>
-  </head>
-  <body>
-    <h1>Add Pokemon</h1>
-    <% if (types.length === 0) { %>
-      <p>No types available. <a href="/types/new">Create a type first</a> before adding a pokemon.</p>
-    <% } else { %>
-      <%- include("../partials/errors.ejs") %>
-      <form action="/pokemon" method="POST">
-        <label for="name">Pokemon: </label>
-        <input type="text" name="name" id="name" />
+<h1>Add Pokemon</h1>
+<% if (types.length === 0) { %>
+  <p>No types available. <a href="/types/new">Create a type first</a> before adding a pokemon.</p>
+<% } else { %>
+  <%- include("../partials/errors.ejs") %>
+  <form action="/pokemon" method="POST">
+    <label for="name">Pokemon: </label>
+    <input type="text" name="name" id="name" />
 
-        <label for="type">Choose a type: </label>
-        <select name="type_id" id="type">
-          <% for (const type of types) { %>
-            <option value="<%= type.id %>">
-              <%= type.name %>
-            </option>
-          <% } %>
-        </select>
-        <button type="submit">Submit</button>
-      </form>
-    <% } %>
-    <a href="/pokemon">Return</a>
-  </body>
-</html>
+    <label for="type">Choose a type: </label>
+    <select name="type_id" id="type">
+      <% for (const type of types) { %>
+        <option value="<%= type.id %>">
+          <%= type.name %>
+        </option>
+      <% } %>
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+<% } %>
+<a href="/pokemon">Return</a>
