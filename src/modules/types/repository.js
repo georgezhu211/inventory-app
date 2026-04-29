@@ -10,6 +10,13 @@ exports.findById = async (id) => {
   return rows[0];
 };
 
+exports.findByTypeId = async (id) => {
+  const { rows } = await db.query("SELECT * FROM pokemon WHERE type_id = $1", [
+    id,
+  ]);
+  return rows;
+};
+
 exports.create = async (type) => {
   await db.query("INSERT INTO types (name) VALUES ($1)", [type.name]);
 };

@@ -34,7 +34,9 @@ exports.show = async (req, res) => {
     throw new NotFoundError("Type not found");
   }
 
-  res.render("types/show", { type });
+  const pokemons = await repository.findByTypeId(req.params.id);
+
+  res.render("types/show", { type, pokemons });
 };
 
 exports.edit = async (req, res) => {

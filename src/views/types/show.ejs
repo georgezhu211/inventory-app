@@ -8,6 +8,11 @@
   <body>
     <h1>Type Details</h1>
     <p>ID: <%= type.id %>, Name: <%= type.name %></p>
+    <ul>
+      <% for (const pokemon of pokemons) { %>
+        <li><a href="/pokemon/<%= pokemon.id %>"><%= pokemon.name %></a></li>
+      <% } %>
+    </ul>
     <a href="/types">Return</a>
   </body>
 </html>
